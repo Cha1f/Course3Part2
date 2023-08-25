@@ -23,10 +23,10 @@ public class FacultyServiceImpl implements FacultyService {
     }
 
     public Faculty findFaculty(long id) {
-        return facultyRepository.findById(id).get();
+        return facultyRepository.findById(id).orElse(null);
     }
 
-    public Faculty editFaculty(long id, Faculty faculty) {
+    public Faculty editFaculty(Faculty faculty) {
         return facultyRepository.save(faculty);
     }
 

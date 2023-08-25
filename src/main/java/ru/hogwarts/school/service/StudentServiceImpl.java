@@ -21,10 +21,10 @@ public class StudentServiceImpl implements StudentService {
     }
 
     public Student findStudent(long id) {
-        return studentRepository.findById(id).get();
+        return studentRepository.findById(id).orElse(null);
     }
 
-    public Student editStudent(long id, Student student) {
+    public Student editStudent(Student student) {
         return studentRepository.save(student);
     }
 
