@@ -54,4 +54,14 @@ public class FacultyController {
         }
         return ResponseEntity.ok(Collections.emptyList());
     }
+
+//    @GetMapping("/by-color-or-name")
+//    public Collection<Faculty> filteredByColorOrName(@RequestParam String ColorOrName) {
+//        return facultyService.getAllByNameColor  !!! ТУТ ДОЛЖЕН БЫТЬ МЕТОД ИЗ FacultyServiceImpl но он его не видит
+//    }
+
+//    @GetMapping("/by-student")
+//    public Faculty getByStudent(Long studentId) {
+//        return facultyService.
+//    }
 }

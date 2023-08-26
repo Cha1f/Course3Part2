@@ -1,9 +1,11 @@
 package ru.hogwarts.school.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.hogwarts.school.model.Faculty;
+import ru.hogwarts.school.model.Student;
 import ru.hogwarts.school.repositories.FacultyRepository;
+import ru.hogwarts.school.repositories.StudentRepository;
+import ru.hogwarts.school.exceptions.StudentNotFoundException;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -13,9 +15,12 @@ import java.util.Objects;
 public class FacultyServiceImpl implements FacultyService {
 
     private final FacultyRepository facultyRepository;
+    private final StudentRepository studentRepository;
 
-    public FacultyServiceImpl(FacultyRepository facultyRepository) {
+    public FacultyServiceImpl(FacultyRepository facultyRepository,
+                              StudentRepository studentRepository) {
         this.facultyRepository = facultyRepository;
+        this.studentRepository = studentRepository;
     }
 
     public Faculty addFaculty(Faculty faculty) {
@@ -43,5 +48,16 @@ public class FacultyServiceImpl implements FacultyService {
             }
         }
         return result;
+    }
+
+//    Метод для поиска факультета по имени или цвету, игнорируя регистр
+    public Collection<Faculty> getAllByNameColor(String name, String color) {
+        return facultyRepository.findAllByColorLikeIgnoreCaseOrNameLikeIgnoreCase(color, name);
+    }
+
+    public Faculty getByStudent(Long studentId) {
+        return studentRepository.findById(studentId)
+                .map(Student::getFaculty)
+                .orElseThrow(StudentNotFoundException::new);
     }
 }
