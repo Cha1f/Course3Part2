@@ -56,10 +56,13 @@ public class StudentController {
         return ResponseEntity.ok(Collections.emptyList());
     }
 
+    @GetMapping("/age-between")
+    public Collection<Student> ageBetween(@RequestParam int min, @RequestParam int max) {
+        return studentService.getByAge(min, max);
+    }
 
-
-//    @GetMapping("/age-between")
-//    public Collection<Student> ageBetween(@RequestParam int min, @RequestParam int max) {
-//        return
-//    }
+    @GetMapping("/by-faculty")
+    public Collection<Student> getByFaculty(Long facultyId) {
+        return studentService.getByFaculty(facultyId);
+    }
 }

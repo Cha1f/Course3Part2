@@ -47,7 +47,7 @@ public class FacultyController {
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping
+    @GetMapping("/by-color")
     public ResponseEntity<Collection<Faculty>> findFaculty(@RequestParam(required = false) String color) {
         if (color != null && !color.isBlank()) {
             return ResponseEntity.ok(facultyService.findByColor(color));
@@ -55,13 +55,13 @@ public class FacultyController {
         return ResponseEntity.ok(Collections.emptyList());
     }
 
-//    @GetMapping("/by-color-or-name")
-//    public Collection<Faculty> filteredByColorOrName(@RequestParam String ColorOrName) {
-//        return facultyService.getAllByNameColor  !!! ТУТ ДОЛЖЕН БЫТЬ МЕТОД ИЗ FacultyServiceImpl но он его не видит
-//    }
+    @GetMapping("/by-color-or-by-name")
+    public Collection<Faculty> filteredByColorOrName(@RequestParam String colorOrName) {
+        return facultyService.getAllByNameOrColor(colorOrName, colorOrName);
+    }
 
-//    @GetMapping("/by-student")
-//    public Faculty getByStudent(Long studentId) {
-//        return facultyService.
-//    }
+    @GetMapping("/by-student")
+    public Faculty getByStudent(Long studentId) {
+        return facultyService.getByStudent(studentId);
+    }
 }

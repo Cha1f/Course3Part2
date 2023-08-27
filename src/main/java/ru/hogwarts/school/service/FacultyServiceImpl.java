@@ -50,8 +50,7 @@ public class FacultyServiceImpl implements FacultyService {
         return result;
     }
 
-//    Метод для поиска факультета по имени или цвету, игнорируя регистр
-    public Collection<Faculty> getAllByNameColor(String name, String color) {
+    public Collection<Faculty> getAllByNameOrColor(String name, String color) {
         return facultyRepository.findAllByColorLikeIgnoreCaseOrNameLikeIgnoreCase(color, name);
     }
 
